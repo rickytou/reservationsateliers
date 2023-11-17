@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h2>Réservation d'un Créneau</h2>
+
+<form th:action="@{/ateliers/reserver}" method="post" th:object="${reservation}">
+    <input type="hidden" th:field="*{atelier}" th:value="${atelier}" />
+    <label for="dateReservation">Date de réservation :</label>
+    <input type="date" id="dateReservation" th:field="*{dateReservation}" required />
+    <span th:if="${#fields.hasErrors('dateReservation')}" th:errors="*{dateReservation}"></span>
+    <button type="submit">Réserver</button>
+</form>
+
+
+</body>
+</html>

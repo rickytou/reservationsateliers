@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+  <title>MakeArts | Description</title>
+</head>
+<body>
+ <div class="wrapper">
+<header>
+    <div class="header">
+     <h1 class="logo">MakeArts</h1>
+     <nav>
+         <ul>
+             <li><a th:href="@{/}" class="active">Accueil</a></li>
+             <li><a th:href="@{/ateliers}">Liste des Ateliers</a></li>
+             <!-- Ajoutez d'autres liens de navigation selon vos besoins -->
+         </ul>
+     </nav>
+    </div>
+ </header>
+ <main>
+     <div class="main">
+	<h2>Détails de l'Atelier</h2>
+
+<div class="details" th:if="${atelier != null}">
+    <p>Nom de l'Atelier : <span th:text="${atelier.nom}"></span></p>
+    <p>Description : <span th:text="${atelier.description}"></span></p>
+
+    <h3>Réservations</h3>
+    <ul class="list-details">
+        <li th:each="reservation : ${reservations}">
+            <!-- Affichez les détails de chaque réservation -->
+            <span>Atelier ID : </span>
+            <span th:text="${reservation.atelier.id}"></span>
+            <span>/ Date de reservation : </span>
+            <span th:text="${reservation.dateReservation}"></span>
+            <!-- Ajoutez d'autres détails de la réservation selon vos besoins -->
+            <a th:href="@{/ateliers/annuler/{id}(id=${reservation.id})}">Annuler</a>
+        </li>
+    </ul>
+
+   <form th:action="@{/ateliers/reserver}" method="post" th:object="${reservation}">
+     <legend>Nouvelle reservation</legend>
+    <input type="hidden" th:field="*{atelier.id}" th:value="${atelier.id}" />
+    <label for="dateReservation">Date de réservation :</label>
+    <input type="date" id="dateReservation" th:field="*{dateReservation}" required />
+    <input type="hidden" name="atelierId" th:value="${atelier.id}" />
+    <button type="submit">Réserver</button>
+</form>
+
+
+</div>
+<div th:if="${atelier == null}">
+    <p>L'atelier n'a pas été trouvé.</p>
+    <!-- Ajoutez des liens ou d'autres éléments selon vos besoins -->
+</div>
+
+</main>
+<footer>
+    <div class="footer">
+      <p>
+        <span>MakeArts&copy;2023Tous droits réservés</span> 
+        <span>Ricardo Samedi</span>
+      </p>
+    </div>
+ </footer>
+ 
+ </div>
+</body>
+</html>

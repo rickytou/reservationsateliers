@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+  <title>MakeArts | Liste des ateliers</title>
+</head>
+<body>
+ <div class="wrapper">
+<header>
+    <div class="header">
+     <h1 class="logo">MakeArts</h1>
+     <nav>
+         <ul>
+             <li><a th:href="@{/}" class="active">Accueil</a></li>
+             <li><a th:href="@{/ateliers}">Liste des Ateliers</a></li>
+             <!-- Ajoutez d'autres liens de navigation selon vos besoins -->
+         </ul>
+     </nav>
+    </div>
+ </header>
+ 
+ <main>
+     <div class="main">
+		 <h2>Liste des ateliers</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="atelier : ${ateliers}">
+        <td th:text="${atelier.nom}"></td>
+        <td th:text="${atelier.description}"></td>
+        <td>
+            <a th:href="@{/ateliers/{id}(id=${atelier.id})}">Voir les détails</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+ </main>
+<footer>
+    <div class="footer">
+      <p>
+        <span>MakeArts&copy;2023Tous droits réservés</span> 
+        <span>Ricardo Samedi</span>
+      </p>
+    </div>
+ </footer>
+ 
+
+ </div>
+</body>
+</html>
